@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>基于Echarts的HTML5 Canvas中国地图DEMO演示</title>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.3.0/echarts.min.js"></script>
+<script src="../js/china.js"></script>
+</head>
+
+<body style="margin: 0 auto;
+        background-image: url(https://images.pexels.com/photos/1029618/pexels-photo-1029618.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;">
+<p style="font-size: 50px;margin: 0;text-align: center;">中国各省平均房价</p>
+<div id="container" style="height: 800px;width:1500px;margin:-20px 0 0 0;"></div>
+<div>
+    <span style="font-size: 11px;margin-left: 20px">注：</span><br>
+    <span style="font-size: 11px;margin-left: 20px;padding-bottom: 20px">澳门：在售楼盘均价：86064元/m²</span>
+</div>
+<!--<button id="button">点击动态切换值或属性</button>-->
+<script type="text/javascript">
+    //修改别的统计实例
+    $('#button').click(function () {
+      dataMap[0].value = 555
+      //修改里面的东西
+      option.visualMap.color[1] = '#123456'
+      //修改完重绘地图
+      var myChart = echarts.init(document.getElementById('container'));
+      myChart.setOption(option,true);
+    });
+    // 全国省份数据可自定义添加多种数据 但name不能变必须是为对应的省份名 里面的值暂未随机数看效果
+    var dataMap = [{ name: '北京',value: 58560,desc:'2019年北京房价58560元/㎡0.03%↑' }, { name: '天津',value: 20954,desc:'2019年天津房价20954元/㎡0.49%↓' }, { name: '上海',value: 50948,desc:'2019年上海房价50948元/㎡0.06%↓'  }, { name: '重庆',value: 11196,desc:'2019年重庆房价11196元/㎡2.52%↓' }, { name: '河北',value: 15206,desc:'2019年石家庄房价15206元/㎡1.09%↓<br>2019年廊坊房价13868元/㎡1.18%↓<br>2019年正定房价13676元/㎡0.01%↑' }, { name: '河南',value: 13267,desc:'2019年郑州房价13267元/㎡0.85%↓<br>2019年洛阳房价8626元/㎡0.4%↑<br>2019年南阳房价8463元/㎡0.19%↓'}, { name: '云南',value: 13112,desc:'2019年昆明房价13112元/㎡1%↑<br>2019年大理房价13026元/㎡0.83%↓<br>2019年西双版纳房价8426元/㎡0.31%↑' },
+        { name: '辽宁',value: 13794,desc:"2019年大连房价13794元/㎡1.15%↑<br>2019年沈阳房价9815元/㎡0.54%↑<br>2019年瓦房店房价7271元/㎡--" }, { name: '黑龙江',value: 9905,desc:"2019年哈尔滨房价9905元/㎡0.53%↑<br>2019年牡丹江房价5660元/㎡0.7%↓<br>2019年齐齐哈尔房价5533元/㎡0.08%↑" }, { name: '湖南',value: 10077,desc:"2019年长沙房价10077元/㎡--<br>2019年岳阳房价7178元/㎡1.17%↓<br>2019年常德房价7053元/㎡0.46%↑" }, { name: '安徽',value: 14229,desc:"2019年合肥房价14229元/㎡0.36%↓<br>2019年芜湖房价9670元/㎡0.95%↓<br>2019年巢湖房价9484元/㎡--" }, { name: '山东',value: 16338,desc: '2019年青岛房价16338元/㎡1.1%↓<br>2019年济南房价16053元/㎡1.41%↓<br>2019年泰安房价11118元/㎡0.04%↑' },
+        { name: '新疆',value: 8127,desc:"2019年乌鲁木齐房价8127元/㎡0.37%↓<br>2019年昌吉房价5989元/㎡0.28%↑<br>2019年石河子房价5619元/㎡0.04%↑" }, { name: '江苏',value: 28537,desc:"2019年南京房价28537元/㎡0.95%↓<br>2019年苏州房价19566元/㎡0.63%↑<br>2019年昆山房价15901元/㎡1.1%↑" }, { name: '浙江',value: 27005,desc:"2019年杭州房价27005元/㎡0.55%↓<br>2019年宁波房价22797元/㎡1.53%↑<br>2019年温州房价20970元/㎡2.29%↑" }, { name: '江西',value: 12184,desc:"2019年南昌房价12184元/㎡0.64%↓<br>2019年赣州房价8380元/㎡1.64%↓<br>2019年吉安房价8029元/㎡0.24%↓" }, { name: '湖北',value: 16834,desc:"2019年武汉房价16834元/㎡1.07%↓<br>2019年襄阳房价9215元/㎡0.12%↓<br>2019年宜昌房价8103元/㎡1.31%↓" },
+        { name: '广西',value: 10979,desc:"2019年南宁房价10979元/㎡0.45%↓<br>2019年柳州房价9249元/㎡0.67%↑<br>2019年北海房价6749元/㎡1.19%↓" }, { name: '甘肃',value: 12427,desc:"2019年兰州房价12427元/㎡0.26%↑<br>2019年天水房价9800元/㎡0.04%↓<br>2019年陇南房价7790元/㎡--"  }, { name: '山西',value: 12427,desc:"2019年太原房价11755元/㎡0.83%↓<br>2019年长治房价8758元/㎡1.79%↑<br>2019年晋城房价8407元/㎡2.38%↑" }, { name: '内蒙古',value: 11370,desc:"2019年呼和浩特房价11370元/㎡0.04%↑<br>2019年赤峰房价9808元/㎡0.39%↑<br>2019年包头房价7989元/㎡0.14%↓" }, { name: '陕西',value:12443,desc:"2019年西安房价12443元/㎡--<br>2019年咸阳房价7646元/㎡2.28%↓<br>2019年榆林房价6940元/㎡2.29%↓" }, { name: '吉林',value: 9590,desc:"2019年长春房价9590元/㎡0.68%↓<br>2019年吉林房价7529元/㎡0.21%↑<br>2019年延边房价5335元/㎡0.06%↓" },
+        { name: '福建',value: 45993,desc:"2019年厦门房价45993元/㎡0.68%↓<br>2019年福州房价24287元/㎡0.8%↓<br>2019年漳州房价12935元/㎡0.76%↓" }, { name: '贵州',value: 9177,desc:"2019年贵阳房价9177元/㎡0.39%↓<br>2019年遵义房价6288元/㎡0.68%↓<br>2019年黔东南房价5868元/㎡0.29%↓" },
+        { name: '广东',value: 55245,desc:"2019年深圳房价55245元/㎡0.98%↑<br>2019年广州房价31677元/㎡1.55%↑<br>2019年珠海房价21129元/㎡0.12%↑" }, { name: '青海',value: 10607,desc:"2019年海东房价10607元/㎡2.8%↑<br>2019年西宁房价9163元/㎡0.77%↑<br>2019年海南房价7086元/㎡6.12%↓" }, { name: '西藏',value: 11931,desc:"2019年拉萨房价11931元/㎡0.67%↓<br>2019年林芝房价8750元/㎡--" }, { name: '四川',value: 13127,desc:"2019年成都房价13127元/㎡0.73%↑<br>2019年凉山房价9197元/㎡0.13%↑<br>2019年绵阳房价7606元/㎡0.34%↓" }, { name: '宁夏',value: 6120,desc:"2019年银川房价6120元/㎡6.03%↑<br>2019年吴忠房价4508元/㎡0.04%↑<br>2019年固原房价4387元/㎡0.32%↓" }, { name: '海南',value: 7086,desc:"2019年海南房价7086元/㎡6.12%↓" },
+        { name: '台湾',value: 50000 }, { name: '香港',value: 341075}, { name: '澳门',value: randomData(),desc:"在售楼盘均价：86064元/m²" }, { name: '南海诸岛',value: "暂无数据" }]
+    // 绘制图表，准备数据
+    var option = {
+      //划过时显示的东西
+        tooltip: {
+          //params代表划过东西里面的值
+            formatter: function (params) {
+              var info;
+              info = '<p style="font-size:18px">' + params.name +'</p><p style="font-size:14px">'+ '最高￥'+params.data.value +'</p>'
+              //如果有desc的话就给他加上 可见划过北京时的样子
+              if (params.data.desc) {
+                info += '<p>'+ params.data.desc +'</p>'
+              }
+              return info;
+            },
+            backgroundColor: "#ED6462",//提示标签背景颜色
+            textStyle: { color: "#fff" } //提示标签字体颜色
+        },
+      //图例 控制范围内显示颜色
+      visualMap: {
+        show : true,
+        x: 'left',
+        y: 'center',
+        //数据范围 和下面的颜色相对应
+        splitList: [
+          {start: 14000, end:17000},{start: 17000, end: 60000},
+          {start: 11000, end:13000},{start: 13000, end: 14000},
+          {start: 10000, end: 11000},{start: 9000, end: 10000},
+          {start: 8000, end: 9000},{start: 3000, end: 8000},
+        ],
+        color: ['#ED2002', '#F569B5', '#85daef','#74e2ca', '#e6ac53', '#9fb5ea','#9feaa5','#E2D7C2']
+      },
+      series: [
+            {
+                name: '中国',
+                type: 'map',
+                mapType: 'china',
+                selectedMode: 'multiple',
+                label: {
+                    normal: {
+                        show: true,//显示省份标签
+                        // textStyle:{color:"#c71585"}//省份标签字体颜色
+                    },
+                    emphasis: {
+                        show: true,//对应的鼠标悬浮效果
+                        // textStyle:{color:"#800080"}
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        borderWidth: .5,//区域边框宽度
+                        // borderColor: '#009fe8',//区域边框颜色
+                        // areaColor:"#ffefd5",//区域颜色
+                    },
+                    emphasis: {
+                        borderWidth: .5,
+                        borderColor: '#4b0082',
+                      //选中时背景色
+                        areaColor: "#ff5238",
+                    }
+                },
+                data: dataMap
+            }
+        ]
+    };
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('container'));
+    //使用制定的配置项和数据显示图表
+    myChart.setOption(option);
+    function randomData() {
+      return Math.round(Math.random()*500);
+    }
+</script>
+</div>
+
+</body>
+</html>
